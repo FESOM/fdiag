@@ -1,0 +1,34 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<table class="table table-sm">
+  <thead>
+    <tr>
+
+      <th scope="col">workflows</th>
+      <th scope="col">Link</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for experiment_name, experiment in experiments.items() %}
+    <tr>
+      <th scope="row">{{ experiment_name }}</th>
+
+    
+      <td><a href="./{{ experiment.experiment_path }}/{{ experiment_name }}.html" class="badge badge-dark">Link</a></td>
+      
+
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+{% endblock %}
+
+
+
