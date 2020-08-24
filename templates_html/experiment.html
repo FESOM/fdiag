@@ -88,18 +88,28 @@
 
     <!-- MAIN -->
     <div class="col py-3">
-      {% for analysis_name, analysis_content in analyses.items() %}
-        {% for image_name, image_content in analysis_content.items() %}
-        <h5><a id="{{ image_content.short_name }}"></a> {{ image_content.name }}</h5>
-        <a href="{{ image_content.path }}"><img src="{{ image_content.path }}" 
-                                                class="img-fluid" 
-                                                title="White flower" 
-                                                alt={{ image_content.short_name }}
-                                                class="img-thumbnail"></a>
+    {% for analysis_name, analysis_content in analyses.items() %}
+      {% for image_name, image_content in analysis_content.items() %}
+    <div class="card" id="{{ image_content.short_name }}" style="width: 40rem;" >
+      <div class="card-body">
+        <h5 class="card-title">{{ image_content.name }}</h5>
+          <a href="{{ image_content.path }}" target="_blank">
+            <img class="card-img" src="{{ image_content.path }}" alt="Card image cap">
+          </a>
+      
+        <p class="card-text"></p>
+      </div>
+      <div class="card-body">
+        <a href="{{ image_content.path_nb }}" target="_blank" class="card-link">Notebook</a>
+        
+      </div>
+    </div>
+    
         {% endfor %}
-      {% endfor %}
-
-    </div>  
+    {% endfor %}
+  </div> 
+   
+     
 
 
   </div>
