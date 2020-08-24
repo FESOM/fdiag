@@ -40,7 +40,7 @@
 
   <div class="page-header">
 
-  <h1> FESOM2 diagnostics <small> sanity checks</small></h1>
+  <h1> FESOM2 diagnostics <small>{{ general.name }}  </small></h1>
   </div>
 
 {% block content %}
@@ -91,7 +91,11 @@
       {% for analysis_name, analysis_content in analyses.items() %}
         {% for image_name, image_content in analysis_content.items() %}
         <h5><a id="{{ image_content.short_name }}"></a> {{ image_content.name }}</h5>
-        <a href="{{ image_content.path }}"><img src="{{ image_content.path }}" class="img-fluid" title="White flower" alt="Flower"></a>
+        <a href="{{ image_content.path }}"><img src="{{ image_content.path }}" 
+                                                class="img-fluid" 
+                                                title="White flower" 
+                                                alt={{ image_content.short_name }}
+                                                class="img-thumbnail"></a>
         {% endfor %}
       {% endfor %}
 
