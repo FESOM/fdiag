@@ -7,7 +7,6 @@ import math
 def define_rowscol(settings, reduce=0):
     number_paths = len(settings["input_paths"]) - reduce
     columns = settings["columns"]
-
     if number_paths < columns:
         ncol = number_paths
     else:
@@ -75,7 +74,7 @@ def drive_difference(settings, analysis_name):
             current_params["depth"] = depth
             current_params.update(driver_settings[variable])
             del current_params["depths"]
-            
+
             if analysis_name != 'climatology':
                 current_params["rowscol"] = define_rowscol(settings, reduce=1)
             else:
@@ -108,7 +107,7 @@ def drive_ice_integrals(settings, analysis_name):
     current_params = create_current_params(settings)
     check_num_paths(settings, min_number=1)
     current_params.update(driver_settings)
-    
+
     ofile = f"{settings['workflow_name']}_{analysis_name}"
     ofile_nb = f"{settings['workflow_name']}_{analysis_name}.ipynb"
     current_params["ofile"] = os.path.join(settings['ofolder_figures'], ofile)
@@ -119,7 +118,7 @@ def drive_ice_integrals(settings, analysis_name):
                 parameters=current_params,
                 nest_asyncio=True,
             )
-    ice_analyses = ['icearea', "icearea_march", 
+    ice_analyses = ['icearea', "icearea_march",
                 "icearea_september", "iceext", "iceext_march", "iceext_september", 'icevol',
                'icevol_march', "icevol_september"]
 
@@ -187,14 +186,14 @@ def drive_ocean_integrals(settings, analysis_name):
     for region_name, region in driver_settings.items():
         for variable_name, variable in region.items():
             for uplow in variable['uplows']:
-                
+
                 current_params["region"] = region_name
                 current_params["variable"] = variable_name
                 current_params['uplow'] = uplow
 
                 if 'figsize_small' in settings:
                     current_params['figsize'] = settings['figsize_small']
-                
+
                 current_params.update(variable)
                 region_name_underscore = region_name.replace(' ', '_')
 
@@ -233,12 +232,12 @@ def drive_xmoc(settings, analysis_name):
     webpage = {}
     image_count = 0
     for region_name, region in driver_settings.items():
-        
+
         current_params["region"] = region_name
 
         # if 'figsize_small' in settings:
         #     current_params['figsize'] = settings['figsize_small']
-                
+
         current_params.update(region)
         print(current_params)
         region_name_underscore = region_name.replace(' ', '_')
@@ -268,12 +267,15 @@ def drive_xmoc(settings, analysis_name):
 
 def drive_amoc_timeseries(settings, analysis_name):
     driver_settings = settings[analysis_name].copy()
+    print(driver_settings)
     current_params = create_current_params(settings)
     check_num_paths(settings, min_number=1)
-    current_params.update(driver_settings)
+    
     if 'figsize_small' in settings:
         current_params['figsize'] = settings['figsize_small']
     
+    current_params.update(driver_settings)
+    print(current_params)
     ofile = f"{settings['workflow_name']}_{analysis_name}"
     ofile_nb = f"{settings['workflow_name']}_{analysis_name}.ipynb"
     current_params["ofile"] = os.path.join(settings['ofolder_figures'], ofile)
@@ -302,7 +304,7 @@ def drive_vertical_profile(settings, analysis_name):
     current_params = create_current_params(settings)
     check_num_paths(settings, min_number=1)
     current_params = fill_input(current_params, settings, fill_type = 'climatology')
-    
+
     webpage = {}
     image_count = 0
     for variable_name, variable in driver_settings.items():
