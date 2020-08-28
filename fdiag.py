@@ -104,7 +104,11 @@ def fdiag():
 
     analyses = {}
     analyses['difference'] = drive_difference
+    analyses['difference_np'] = drive_difference
+    analyses['difference_sp'] = drive_difference
     analyses['climatology'] = drive_difference
+    analyses['climatology_np'] = drive_difference
+    analyses['climatology_sp'] = drive_difference
     analyses['ice_integrals'] = drive_ice_integrals
     analyses['hovm_difference'] = drive_hovm_difference
     analyses['hovm_difference_clim'] = drive_hovm_difference

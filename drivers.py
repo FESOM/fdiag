@@ -64,7 +64,7 @@ def check_num_paths(settings, min_number=2):
 def drive_difference(settings, analysis_name):
     driver_settings = settings[analysis_name].copy()
     current_params = create_current_params(settings, years_short=True)
-    if analysis_name != 'climatology':
+    if 'climatology' not in analysis_name:
         check_num_paths(settings, min_number=2)
         current_params = fill_input(current_params, settings, fill_type = "reference")
     else:
@@ -79,7 +79,7 @@ def drive_difference(settings, analysis_name):
             current_params.update(driver_settings[variable])
             del current_params["depths"]
 
-            if analysis_name != 'climatology':
+            if 'climatology' not in analysis_name:
                 current_params["rowscol"] = define_rowscol(settings, reduce=1)
             else:
                 current_params["rowscol"] = define_rowscol(settings, reduce=0)
