@@ -1,3 +1,11 @@
+workflow_name: "test"
+input_paths:
+    - /Users/nkolduno/PYTHON/DATA/output_7_8/
+    - /Users/nkolduno/PYTHON/DATA/output_7_10
+input_names:
+    - o_7_8
+    - o_7_10
+
 meshpath: '/Users/nkolduno/PYTHON/DATA/core2_meanz_mesh/'
 abg: [50, 15, -90]
 climatology_path: '/Users/nkolduno/PYTHON/DATA/CLIM_on_mesh/core2_meanz/'
