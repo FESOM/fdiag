@@ -14,7 +14,8 @@ from drivers import (
     drive_ocean_integrals,
     drive_xmoc,
     drive_amoc_timeseries,
-    drive_vertical_profile
+    drive_vertical_profile,
+    drive_ocean_integrals_difference
 )
 
 templates_path = pkg_resources.resource_filename(__name__, f"templates_html")
@@ -83,6 +84,8 @@ def fdiag():
     ofolder = f"./results/{workflow_name}"
 
     settings["years"] = list(range(settings["start_year"], settings["end_year"] + 1))
+    if 'start_year_short' in settings:
+        settings["years_short"] = list(range(settings["start_year_short"], settings["end_year_short"] + 1))
     settings["input_paths"] = input_paths
     settings["input_names"] = input_names
     settings["workflow_name"] = workflow_name
@@ -110,9 +113,13 @@ def fdiag():
     analyses['xmoc_difference'] = drive_xmoc
     analyses['amoc_timeseries'] = drive_amoc_timeseries
     analyses['vertical_profile'] = drive_vertical_profile
+    analyses['ocean_integrals_difference'] = drive_ocean_integrals_difference
+    analyses['ocean_integrals_difference_clim'] = drive_ocean_integrals_difference
+    
 
     for analysis in analyses:
-        if analysis in analyses:
+        if analysis in settings:
+            print(f"!!! Performing {analysis} !!!")
             webpage = analyses[analysis](settings, analysis)
             webpages['analyses'][analysis] = webpage
 

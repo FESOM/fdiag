@@ -15,13 +15,17 @@ def define_rowscol(settings, reduce=0):
     return [nrows, ncol]
 
 
-def create_current_params(settings):
+def create_current_params(settings, years_short=False):
     current_params = {}
     for key, value in settings.items():
         if isinstance(value, dict):
             pass
         else:
             current_params[key] = value
+    if years_short:
+        if 'years_short' in settings:
+            current_params['years'] = settings['years_short']
+    
     return current_params
 
 
@@ -59,7 +63,7 @@ def check_num_paths(settings, min_number=2):
 
 def drive_difference(settings, analysis_name):
     driver_settings = settings[analysis_name].copy()
-    current_params = create_current_params(settings)
+    current_params = create_current_params(settings, years_short=True)
     if analysis_name != 'climatology':
         check_num_paths(settings, min_number=2)
         current_params = fill_input(current_params, settings, fill_type = "reference")
@@ -83,7 +87,6 @@ def drive_difference(settings, analysis_name):
             ofile = f"{settings['workflow_name']}_{analysis_name}_{variable}_{depth}.png"
             ofile_nb = f"{settings['workflow_name']}_{analysis_name}_{variable}_{depth}.ipynb"
             current_params["ofile"] = os.path.join(settings['ofolder_figures'], ofile)
-
             pm.execute_notebook(
                 "./templates/difference.ipynb",
                 os.path.join(settings['ofolder_notebooks'], ofile_nb),
@@ -222,24 +225,19 @@ def drive_ocean_integrals(settings, analysis_name):
 
 def drive_xmoc(settings, analysis_name):
     driver_settings = settings[analysis_name].copy()
-    current_params = create_current_params(settings)
+    current_params = create_current_params(settings, years_short=True)
     if analysis_name == 'xmoc_difference':
         check_num_paths(settings, min_number=2)
         current_params = fill_input(current_params, settings, fill_type = 'reference')
 
     check_num_paths(settings, min_number=1)
-    # current_params = fill_input(current_params, settings, fill_type = 'pure')
     webpage = {}
     image_count = 0
     for region_name, region in driver_settings.items():
 
         current_params["region"] = region_name
 
-        # if 'figsize_small' in settings:
-        #     current_params['figsize'] = settings['figsize_small']
-
         current_params.update(region)
-        print(current_params)
         region_name_underscore = region_name.replace(' ', '_')
 
         ofile = f"{settings['workflow_name']}_{analysis_name}_{region_name_underscore}.png"
@@ -267,7 +265,6 @@ def drive_xmoc(settings, analysis_name):
 
 def drive_amoc_timeseries(settings, analysis_name):
     driver_settings = settings[analysis_name].copy()
-    print(driver_settings)
     current_params = create_current_params(settings)
     check_num_paths(settings, min_number=1)
     
@@ -275,7 +272,6 @@ def drive_amoc_timeseries(settings, analysis_name):
         current_params['figsize'] = settings['figsize_small']
     
     current_params.update(driver_settings)
-    print(current_params)
     ofile = f"{settings['workflow_name']}_{analysis_name}"
     ofile_nb = f"{settings['workflow_name']}_{analysis_name}.ipynb"
     current_params["ofile"] = os.path.join(settings['ofolder_figures'], ofile)
@@ -301,7 +297,7 @@ def drive_amoc_timeseries(settings, analysis_name):
 
 def drive_vertical_profile(settings, analysis_name):
     driver_settings = settings[analysis_name].copy()
-    current_params = create_current_params(settings)
+    current_params = create_current_params(settings, years_short=True)
     check_num_paths(settings, min_number=1)
     current_params = fill_input(current_params, settings, fill_type = 'climatology')
 
@@ -342,4 +338,54 @@ def drive_vertical_profile(settings, analysis_name):
             "short_name"
         ] = f"{settings['workflow_name']}_{analysis_name}_{variable_name}_absolute"
 
+    return webpage
+
+def drive_ocean_integrals_difference(settings, analysis_name):
+    driver_settings = settings[analysis_name].copy()
+    current_params = create_current_params(settings)
+    check_num_paths(settings, min_number=1)
+    if analysis_name != 'ocean_integrals_difference_clim':
+        check_num_paths(settings, min_number=2)
+        current_params = fill_input(current_params, settings, fill_type = 'reference')
+    else:
+        check_num_paths(settings, min_number=1)
+        current_params = fill_input(current_params, settings, fill_type = 'climatology')
+    # current_params = fill_input(current_params, settings, fill_type = 'pure')
+    webpage = {}
+    image_count = 0
+    for region_name, region in driver_settings.items():
+        for variable_name, variable in region.items():
+            for uplow in variable['uplows']:
+
+                current_params["region"] = region_name
+                current_params["variable"] = variable_name
+                current_params['uplow'] = uplow
+
+                if 'figsize_small' in settings:
+                    current_params['figsize'] = settings['figsize_small']
+
+                current_params.update(variable)
+                region_name_underscore = region_name.replace(' ', '_')
+
+                ofile = f"{settings['workflow_name']}_{analysis_name}_{region_name_underscore}_{variable_name}_{uplow[0]}_{uplow[1]}.png"
+                ofile_nb = f"{settings['workflow_name']}_{analysis_name}_{region_name_underscore}_{variable_name}_{uplow[0]}_{uplow[1]}.ipynb"
+                current_params["ofile"] = os.path.join(settings['ofolder_figures'], ofile)
+
+                pm.execute_notebook(
+                    f"./templates/ocean_integrals_difference.ipynb",
+                    os.path.join(settings['ofolder_notebooks'], ofile_nb),
+                    parameters=current_params,
+                    nest_asyncio=True,
+                )
+
+                webpage[f"image_{image_count}"] = {}
+                webpage[f"image_{image_count}"][
+                    "name"
+                ] = f"{variable_name.capitalize()} for {region_name} {uplow[0]}-{uplow[1]}m"
+                webpage[f"image_{image_count}"]["path"] = os.path.join('./figures/', ofile)
+                webpage[f"image_{image_count}"]["path_nb"] = os.path.join('./notebooks/', ofile_nb)
+                webpage[f"image_{image_count}"][
+                    "short_name"
+                ] = f"{settings['workflow_name']}_{analysis_name}_{region_name_underscore}_{variable_name}_{uplow[0]}_{uplow[1]}"
+                image_count += 1
     return webpage
