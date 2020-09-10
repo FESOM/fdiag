@@ -6,6 +6,7 @@ import pkg_resources
 from jinja2 import Environment, FileSystemLoader
 import yaml
 import argparse
+import json
 
 from drivers import (
     drive_difference,
@@ -97,10 +98,20 @@ def fdiag():
         os.makedirs(settings["ofolder_notebooks"])
         os.makedirs(settings["ofolder_figures"])
 
-    webpages = {}
+    ofilename_webpages = f"{settings['workflow_name']}.json"
+    opath_webpages = os.path.join(ofolder, ofilename_webpages)
+
+    if os.path.exists(opath_webpages):
+        with open(opath_webpages) as json_file:
+            webpages = json.load(json_file)
+            print(webpages)
+    else:
+        webpages = {}
+        webpages["analyses"] = {}
+
     webpages["general"] = {}
     webpages["general"]["name"] = settings["workflow_name"]
-    webpages["analyses"] = {}
+    
 
     analyses = {}
     analyses['difference'] = drive_difference
@@ -132,6 +143,10 @@ def fdiag():
     #     if not os.path.exists(ofolder):
     #         os.makedirs(ofolder)
     #     date = cn["experiments"][experiment_name]["date"]
+    
+    with open(opath_webpages, 'w') as fp:
+        json.dump(webpages, fp)
+
     ofilename = f"{settings['workflow_name']}.html"
     opath = os.path.join(ofolder, ofilename)
     ofile = open(opath, "w")
