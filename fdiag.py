@@ -39,12 +39,12 @@ def fdiag():
                                      description="Run FESOM diagnostics")
     parser.add_argument("workflow_settings", help="Name of the diagnostic workflow")
 
-    # parser.add_argument(
-    #     "--machine",
-    #     "-m",
-    #     type=str,
-    #     help="Name of the host. Should be in ./examples/paths.yml",
-    # )
+    parser.add_argument(
+        "--diagnostics",
+        "-d",
+        nargs='+',
+        help="Run only particilar diagnostics from the yml file.",
+    )
     # parser.add_argument(
     #     "--account",
     #     "-a",
@@ -65,6 +65,7 @@ def fdiag():
     # )
 
     args = parser.parse_args()
+    print(args.diagnostics)
 
     workflow_settings = args.workflow_settings
 
@@ -131,12 +132,21 @@ def fdiag():
     analyses['ocean_integrals_difference'] = drive_ocean_integrals_difference
     analyses['ocean_integrals_difference_clim'] = drive_ocean_integrals_difference
     
-
+    # loop over all analyses
     for analysis in analyses:
+        # check if analysis is in input yaml
         if analysis in settings:
-            print(f"!!! Performing {analysis} !!!")
-            webpage = analyses[analysis](settings, analysis)
-            webpages['analyses'][analysis] = webpage
+            # if no specific analysis are selected with -d option, just run
+            if args.diagnostics is None:
+                print(f"!!! Performing {analysis} !!!")
+                webpage = analyses[analysis](settings, analysis)
+                webpages['analyses'][analysis] = webpage
+            # else just perform those selected with -d
+            else:
+                if analysis in args.diagnostics:
+                    print(f"!!! Performing {analysis} !!!")
+                    webpage = analyses[analysis](settings, analysis)
+                    webpages['analyses'][analysis] = webpage
 
 
     # ofolder = f"{experiment_path}/"
