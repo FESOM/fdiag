@@ -8,6 +8,7 @@ import yaml
 import argparse
 import json
 
+
 from drivers import (
     drive_difference,
     drive_ice_integrals,
@@ -16,33 +17,67 @@ from drivers import (
     drive_xmoc,
     drive_amoc_timeseries,
     drive_vertical_profile,
-    drive_ocean_integrals_difference
+    drive_ocean_integrals_difference,
 )
 
 templates_path = pkg_resources.resource_filename(__name__, f"templates_html")
 file_loader = FileSystemLoader(templates_path)
 env = Environment(loader=file_loader)
 
+
 def check_input_names(input_names, input_paths):
-        if input_names is None:
-            input_names = []
-            for run in input_paths:
-                run = os.path.join(run, "")
-                input_names.append(run.split("/")[-2])
-        elif len(input_names) != len(input_paths):
-            raise ValueError("The size of input_names is not equal to the size of input_paths")
-        
-        return input_names
+    if input_names is None:
+        input_names = []
+        for run in input_paths:
+            run = os.path.join(run, "")
+            input_names.append(run.split("/")[-2])
+    elif len(input_names) != len(input_paths):
+        raise ValueError(
+            "The size of input_names is not equal to the size of input_paths"
+        )
+
+    return input_names
+
+
+def render_latex(settings, ofolder):
+    templates_path = pkg_resources.resource_filename(__name__, f"templates_latex")
+    latex_jinja_env = Environment(
+        block_start_string="\BLOCK{",
+        block_end_string="}",
+        variable_start_string="\VAR{",
+        variable_end_string="}",
+        comment_start_string="\#{",
+        comment_end_string="}",
+        line_statement_prefix="%%",
+        line_comment_prefix="%#",
+        trim_blocks=True,
+        autoescape=False,
+        loader=FileSystemLoader(templates_path),
+    )
+    template = latex_jinja_env.get_template('experiment.tex')
+    ofilename_latex = f"{settings['workflow_name']}.tex"
+    opath_latex = os.path.join(ofolder, ofilename_latex)
+
+    ofilename_webpages = f"{settings['workflow_name']}.json"
+    opath_webpages = os.path.join(ofolder, ofilename_webpages)
+    with open(opath_webpages) as json_file:
+        webpages = json.load(json_file)
+            
+    output = template.render(webpages)
+    ofile = open(opath_latex, "w")
+    ofile.write(output)
+    ofile.close()
+    os.system(f'pdflatex -output-directory {ofolder} {opath_latex}')
+
 
 def fdiag():
-    parser = argparse.ArgumentParser(prog="fdiag",
-                                     description="Run FESOM diagnostics")
+    parser = argparse.ArgumentParser(prog="fdiag", description="Run FESOM diagnostics")
     parser.add_argument("workflow_settings", help="Name of the diagnostic workflow")
 
     parser.add_argument(
         "--diagnostics",
         "-d",
-        nargs='+',
+        nargs="+",
         help="Run only particilar diagnostics from the yml file.",
     )
     # parser.add_argument(
@@ -72,11 +107,11 @@ def fdiag():
     with open(workflow_settings) as file:
         settings = yaml.load(file, Loader=yaml.FullLoader)
 
-    workflow_name = settings['workflow_name']
+    workflow_name = settings["workflow_name"]
 
-    input_paths = settings['input_paths']
+    input_paths = settings["input_paths"]
     if "input_names" in settings:
-        input_names = settings['input_names']
+        input_names = settings["input_names"]
     else:
         input_names = None
 
@@ -86,8 +121,10 @@ def fdiag():
     ofolder = f"./results/{workflow_name}"
 
     settings["years"] = list(range(settings["start_year"], settings["end_year"] + 1))
-    if 'start_year_short' in settings:
-        settings["years_short"] = list(range(settings["start_year_short"], settings["end_year_short"] + 1))
+    if "start_year_short" in settings:
+        settings["years_short"] = list(
+            range(settings["start_year_short"], settings["end_year_short"] + 1)
+        )
     settings["input_paths"] = input_paths
     settings["input_names"] = input_names
     settings["workflow_name"] = workflow_name
@@ -102,6 +139,7 @@ def fdiag():
     ofilename_webpages = f"{settings['workflow_name']}.json"
     opath_webpages = os.path.join(ofolder, ofilename_webpages)
 
+    print(opath_webpages)
     if os.path.exists(opath_webpages):
         with open(opath_webpages) as json_file:
             webpages = json.load(json_file)
@@ -112,26 +150,25 @@ def fdiag():
 
     webpages["general"] = {}
     webpages["general"]["name"] = settings["workflow_name"]
-    
 
     analyses = {}
-    analyses['difference'] = drive_difference
-    analyses['difference_np'] = drive_difference
-    analyses['difference_sp'] = drive_difference
-    analyses['climatology'] = drive_difference
-    analyses['climatology_np'] = drive_difference
-    analyses['climatology_sp'] = drive_difference
-    analyses['ice_integrals'] = drive_ice_integrals
-    analyses['hovm_difference'] = drive_hovm_difference
-    analyses['hovm_difference_clim'] = drive_hovm_difference
-    analyses['ocean_integrals'] = drive_ocean_integrals
-    analyses['xmoc'] = drive_xmoc
-    analyses['xmoc_difference'] = drive_xmoc
-    analyses['amoc_timeseries'] = drive_amoc_timeseries
-    analyses['vertical_profile'] = drive_vertical_profile
-    analyses['ocean_integrals_difference'] = drive_ocean_integrals_difference
-    analyses['ocean_integrals_difference_clim'] = drive_ocean_integrals_difference
-    
+    analyses["difference"] = drive_difference
+    analyses["difference_np"] = drive_difference
+    analyses["difference_sp"] = drive_difference
+    analyses["climatology"] = drive_difference
+    analyses["climatology_np"] = drive_difference
+    analyses["climatology_sp"] = drive_difference
+    analyses["ice_integrals"] = drive_ice_integrals
+    analyses["hovm_difference"] = drive_hovm_difference
+    analyses["hovm_difference_clim"] = drive_hovm_difference
+    analyses["ocean_integrals"] = drive_ocean_integrals
+    analyses["xmoc"] = drive_xmoc
+    analyses["xmoc_difference"] = drive_xmoc
+    analyses["amoc_timeseries"] = drive_amoc_timeseries
+    analyses["vertical_profile"] = drive_vertical_profile
+    analyses["ocean_integrals_difference"] = drive_ocean_integrals_difference
+    analyses["ocean_integrals_difference_clim"] = drive_ocean_integrals_difference
+
     # loop over all analyses
     for analysis in analyses:
         # check if analysis is in input yaml
@@ -140,32 +177,27 @@ def fdiag():
             if args.diagnostics is None:
                 print(f"!!! Performing {analysis} !!!")
                 webpage = analyses[analysis](settings, analysis)
-                webpages['analyses'][analysis] = webpage
+                webpages["analyses"][analysis] = webpage
             # else just perform those selected with -d
             else:
                 if analysis in args.diagnostics:
                     print(f"!!! Performing {analysis} !!!")
                     webpage = analyses[analysis](settings, analysis)
-                    webpages['analyses'][analysis] = webpage
+                    webpages["analyses"][analysis] = webpage
 
-
-    # ofolder = f"{experiment_path}/"
-    #     if not os.path.exists(ofolder):
-    #         os.makedirs(ofolder)
-    #     date = cn["experiments"][experiment_name]["date"]
-    
-    with open(opath_webpages, 'w') as fp:
+    with open(opath_webpages, "w") as fp:
         json.dump(webpages, fp)
 
     ofilename = f"{settings['workflow_name']}.html"
     opath = os.path.join(ofolder, ofilename)
     ofile = open(opath, "w")
     template = env.get_template("experiment.html")
-    #     output = template.render(cn["experiments"][experiment_name])
     output = template.render(webpages)
     ofile.write(output)
     ofile.close()
-    # print(webpages)
+
+    render_latex(settings, ofolder)
+
 
 if __name__ == "__main__":
     # args = parser.parse_args()
