@@ -38,7 +38,22 @@ def check_input_names(input_names, input_paths):
 
     return input_names
 
+class cd:
+    """Context manager for changing the current working directory.
 
+    https://stackoverflow.com/questions/431684/how-do-i-change-the-working-directory-in-python
+    """
+    def __init__(self, newPath):
+        self.newPath = os.path.expanduser(newPath)
+
+    def __enter__(self):
+        self.savedPath = os.getcwd()
+        os.chdir(self.newPath)
+
+    def __exit__(self, etype, value, traceback):
+        os.chdir(self.savedPath)
+
+        
 def render_latex(settings, ofolder):
     templates_path = pkg_resources.resource_filename(__name__, f"templates_latex")
     latex_jinja_env = Environment(
@@ -67,7 +82,8 @@ def render_latex(settings, ofolder):
     ofile = open(opath_latex, "w")
     ofile.write(output)
     ofile.close()
-    os.system(f'pdflatex -output-directory {ofolder} {opath_latex}')
+    with cd(ofolder):
+        os.system(f'pdflatex -interaction=nonstopmode {ofilename_latex}')
 
 
 def fdiag():
