@@ -7,6 +7,8 @@ from jinja2 import Environment, FileSystemLoader
 import yaml
 import argparse
 import json
+import glob
+import shutil
 
 
 from drivers import (
@@ -53,7 +55,31 @@ class cd:
     def __exit__(self, etype, value, traceback):
         os.chdir(self.savedPath)
 
+
+def render_main_page():
+    experiment_paths = glob.glob(f"./results/*")
+    experiment_paths.sort()
+
+    experiment_names = []
+    for experiment in experiment_paths:
+        experiment_names.append(os.path.basename(experiment))
         
+    cn = {}
+    cn["title"] = "FESOM2 diagnostics"
+    cn["experiments"] = {}
+
+    for experiment_name, experiment_path in zip(experiment_names, experiment_paths):
+        cn["experiments"][experiment_name] = {}
+        cn["experiments"][experiment_name]['experiment_path'] = experiment_path
+        
+    ofile = open("index.html", "w")
+    template = env.get_template("index.html")
+    output = template.render(cn)
+    ofile.write(output)
+    ofile.close()
+    shutil.copy(os.path.join(templates_path, 'fesom2_logo.png'), './')
+
+
 def render_latex(settings, ofolder):
     templates_path = pkg_resources.resource_filename(__name__, f"templates_latex")
     latex_jinja_env = Environment(
@@ -212,6 +238,7 @@ def fdiag():
     ofile.write(output)
     ofile.close()
 
+    render_main_page()
     render_latex(settings, ofolder)
 
 
