@@ -11,7 +11,7 @@ import glob
 import shutil
 
 
-from drivers import (
+from fdiag.drivers import (
     drive_difference,
     drive_ice_integrals,
     drive_hovm_difference,

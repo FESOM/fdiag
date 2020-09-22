@@ -2,8 +2,10 @@ import yaml
 import os
 import papermill as pm
 import math
+import pkg_resources
 
-
+templates_nb_path = pkg_resources.resource_filename(__name__, f"templates")
+print(templates_nb_path)
 def define_rowscol(settings, reduce=0):
     number_paths = len(settings["input_paths"]) - reduce
     columns = settings["columns"]
@@ -88,7 +90,7 @@ def drive_difference(settings, analysis_name):
             ofile_nb = f"{settings['workflow_name']}_{analysis_name}_{variable}_{depth}.ipynb"
             current_params["ofile"] = os.path.join(settings['ofolder_figures'], ofile)
             pm.execute_notebook(
-                "./templates/difference.ipynb",
+                f"{templates_nb_path}/difference.ipynb",
                 os.path.join(settings['ofolder_notebooks'], ofile_nb),
                 parameters=current_params,
                 nest_asyncio=True,
@@ -116,7 +118,7 @@ def drive_ice_integrals(settings, analysis_name):
     current_params["ofile"] = os.path.join(settings['ofolder_figures'], ofile)
 
     pm.execute_notebook(
-                f"./templates/{analysis_name}.ipynb",
+                f"{templates_nb_path}/{analysis_name}.ipynb",
                 os.path.join(settings['ofolder_notebooks'], ofile_nb),
                 parameters=current_params,
                 nest_asyncio=True,
@@ -161,7 +163,7 @@ def drive_hovm_difference(settings, analysis_name):
             current_params["ofile"] = os.path.join(settings['ofolder_figures'], ofile)
 
             pm.execute_notebook(
-                "./templates/hovm_difference.ipynb",
+                f"{templates_nb_path}/hovm_difference.ipynb",
                 os.path.join(settings['ofolder_notebooks'], ofile_nb),
                 parameters=current_params,
                 nest_asyncio=True,
@@ -205,7 +207,7 @@ def drive_ocean_integrals(settings, analysis_name):
                 current_params["ofile"] = os.path.join(settings['ofolder_figures'], ofile)
 
                 pm.execute_notebook(
-                    f"./templates/{analysis_name}.ipynb",
+                    f"{templates_nb_path}/{analysis_name}.ipynb",
                     os.path.join(settings['ofolder_notebooks'], ofile_nb),
                     parameters=current_params,
                     nest_asyncio=True,
@@ -245,7 +247,7 @@ def drive_xmoc(settings, analysis_name):
         current_params["ofile"] = os.path.join(settings['ofolder_figures'], ofile)
 
         pm.execute_notebook(
-            f"./templates/{analysis_name}.ipynb",
+            f"{templates_nb_path}/{analysis_name}.ipynb",
             os.path.join(settings['ofolder_notebooks'], ofile_nb),
             parameters=current_params,
             nest_asyncio=True,
@@ -277,7 +279,7 @@ def drive_amoc_timeseries(settings, analysis_name):
     current_params["ofile"] = os.path.join(settings['ofolder_figures'], ofile)
 
     pm.execute_notebook(
-                f"./templates/{analysis_name}.ipynb",
+                f"{templates_nb_path}/{analysis_name}.ipynb",
                 os.path.join(settings['ofolder_notebooks'], ofile_nb),
                 parameters=current_params,
                 nest_asyncio=True,
@@ -312,7 +314,7 @@ def drive_vertical_profile(settings, analysis_name):
         current_params["ofile"] = os.path.join(settings['ofolder_figures'], ofile)
 
         pm.execute_notebook(
-            f"./templates/{analysis_name}.ipynb",
+            f"{templates_nb_path}/{analysis_name}.ipynb",
             os.path.join(settings['ofolder_notebooks'], ofile_nb),
             parameters=current_params,
             nest_asyncio=True,
@@ -372,7 +374,7 @@ def drive_ocean_integrals_difference(settings, analysis_name):
                 current_params["ofile"] = os.path.join(settings['ofolder_figures'], ofile)
 
                 pm.execute_notebook(
-                    f"./templates/ocean_integrals_difference.ipynb",
+                    f"{templates_nb_path}/ocean_integrals_difference.ipynb",
                     os.path.join(settings['ofolder_notebooks'], ofile_nb),
                     parameters=current_params,
                     nest_asyncio=True,
