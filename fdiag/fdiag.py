@@ -122,12 +122,12 @@ def fdiag():
         nargs="+",
         help="Run only particilar diagnostics from the yml file.",
     )
-    # parser.add_argument(
-    #     "--account",
-    #     "-a",
-    #     type=str,
-    #     help="Account",
-    # )
+    parser.add_argument(
+        "--nopdf",
+        "-n",
+        action='store_true',
+        help="If present, no pdf will be generated."
+    )
     # parser.add_argument(
     #     "--newbin",
     #     "-n",
@@ -240,7 +240,9 @@ def fdiag():
     ofile.close()
 
     render_main_page()
-    render_latex(settings, ofolder)
+    if args.nopdf is False:
+        render_latex(settings, ofolder)
+    
 
 
 if __name__ == "__main__":
