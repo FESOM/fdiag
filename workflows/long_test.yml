@@ -122,7 +122,16 @@ xmoc_difference:
 amoc_timeseries:
     latitudes: [26.5, 45]
     
-vertical_profile:
+vertical_profile_diff:
+    temp:
+        regions: ["Global Ocean", "Atlantic_Basin", "Pacific_Basin", "Indian_Basin", "Southern_Ocean_Basin", "Arctic_Basin"]
+        maxdepth: 3000
+    salt:
+        regions: ["Global Ocean", "Atlantic_Basin", "Pacific_Basin", "Indian_Basin", "Southern_Ocean_Basin", "Arctic_Basin"]
+        maxdepth: 3000
+        units: "psu"
+
+vertical_profile_diff_clim:
     temp:
         regions: ["Global Ocean", "Atlantic_Basin", "Pacific_Basin", "Indian_Basin", "Southern_Ocean_Basin", "Arctic_Basin"]
         maxdepth: 3000

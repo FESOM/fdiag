@@ -207,7 +207,8 @@ def fdiag():
     analyses["xmoc"] = drive_xmoc
     analyses["xmoc_difference"] = drive_xmoc
     analyses["amoc_timeseries"] = drive_amoc_timeseries
-    analyses["vertical_profile"] = drive_vertical_profile
+    analyses["vertical_profile_diff"] = drive_vertical_profile
+    analyses["vertical_profile_diff_clim"] = drive_vertical_profile
     analyses["ocean_integrals_difference"] = drive_ocean_integrals_difference
     analyses["ocean_integrals_difference_clim"] = drive_ocean_integrals_difference
 

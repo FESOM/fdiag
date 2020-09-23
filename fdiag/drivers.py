@@ -300,8 +300,13 @@ def drive_amoc_timeseries(settings, analysis_name):
 def drive_vertical_profile(settings, analysis_name):
     driver_settings = settings[analysis_name].copy()
     current_params = create_current_params(settings, years_short=True)
-    check_num_paths(settings, min_number=1)
-    current_params = fill_input(current_params, settings, fill_type = 'climatology')
+    if analysis_name != 'vertical_profile_difference_clim':
+        check_num_paths(settings, min_number=2)
+        current_params = fill_input(current_params, settings, fill_type = 'reference')
+    else:
+        check_num_paths(settings, min_number=1)
+        current_params = fill_input(current_params, settings, fill_type = 'climatology')
+    
 
     webpage = {}
     image_count = 0
@@ -314,7 +319,7 @@ def drive_vertical_profile(settings, analysis_name):
         current_params["ofile"] = os.path.join(settings['ofolder_figures'], ofile)
 
         pm.execute_notebook(
-            f"{templates_nb_path}/{analysis_name}.ipynb",
+            f"{templates_nb_path}/vertical_profile_difference.ipynb",
             os.path.join(settings['ofolder_notebooks'], ofile_nb),
             parameters=current_params,
             nest_asyncio=True,
