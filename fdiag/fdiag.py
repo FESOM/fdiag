@@ -142,7 +142,8 @@ def fdiag():
     # )
 
     args = parser.parse_args()
-    print(args.diagnostics)
+    if args.diagnostics:
+        print(f"Only those diagnostics will be run: {args.diagnostics}")
 
     workflow_settings = args.workflow_settings
 
@@ -158,7 +159,7 @@ def fdiag():
         input_names = None
 
     input_names = check_input_names(input_names, input_paths)
-    print(input_names)
+    print(f"The names of runs to be processed are:{input_names}")
 
     ofolder = f"./results/{workflow_name}"
 
@@ -181,11 +182,11 @@ def fdiag():
     ofilename_webpages = f"{settings['workflow_name']}.json"
     opath_webpages = os.path.join(ofolder, ofilename_webpages)
 
-    print(opath_webpages)
     if os.path.exists(opath_webpages):
         with open(opath_webpages) as json_file:
             webpages = json.load(json_file)
-            print(webpages)
+            print(f"Data on previous runs exist in {opath_webpages}, \n")
+            print("they will be used to generate output for diagnostics you do not run this time.")
     else:
         webpages = {}
         webpages["analyses"] = {}
