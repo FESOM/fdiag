@@ -344,6 +344,7 @@ def drive_vertical_profile(settings, analysis_name):
         webpage[f"image_{image_count}"][
             "short_name"
         ] = f"{settings['workflow_name']}_{analysis_name}_{variable_name}_absolute"
+        image_count += 1
 
     return webpage
 
