@@ -22,6 +22,16 @@ end_year: 1986
 start_year_short: 1982
 end_year_short: 1986
 
+
+variable:
+    temp:
+        levels: [-2, 30, 41]
+        depths: [0, 100, 1000]
+    ssh:
+        levels: [0, 0.4, 41]
+        depths: [0]
+        how: 'std'
+
 difference:
     temp:
         levels: [-1,1, 41]

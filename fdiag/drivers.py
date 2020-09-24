@@ -62,6 +62,43 @@ def check_num_paths(settings, min_number=2):
             f"You specified only {number_paths} path(s), analysis require at least {min_number}"
         )
 
+def drive_variable(settings, analysis_name):
+    driver_settings = settings[analysis_name].copy()
+    current_params = create_current_params(settings, years_short=True)
+    check_num_paths(settings, min_number=1)
+    current_params = fill_input(current_params, settings, fill_type = "climatology")
+    webpage = {}
+    image_count = 0
+    for variable in driver_settings:
+        for depth in driver_settings[variable]["depths"]:
+            current_params["variable"] = variable
+            current_params["depth"] = depth
+            current_params.update(driver_settings[variable])
+            del current_params["depths"]
+
+            current_params["rowscol"] = define_rowscol(settings, reduce=0)
+
+            ofile = f"{settings['workflow_name']}_{analysis_name}_{variable}_{depth}.png"
+            ofile_nb = f"{settings['workflow_name']}_{analysis_name}_{variable}_{depth}.ipynb"
+            current_params["ofile"] = os.path.join(settings['ofolder_figures'], ofile)
+            pm.execute_notebook(
+                f"{templates_nb_path}/variable.ipynb",
+                os.path.join(settings['ofolder_notebooks'], ofile_nb),
+                parameters=current_params,
+                nest_asyncio=True,
+            )
+            webpage[f"image_{image_count}"] = {}
+            webpage[f"image_{image_count}"][
+                "name"
+            ] = f"{variable.capitalize()} at {depth} m"
+            webpage[f"image_{image_count}"]["path"] = os.path.join('./figures/', ofile)
+            webpage[f"image_{image_count}"]["path_nb"] = os.path.join('./notebooks/', ofile_nb)
+            webpage[f"image_{image_count}"][
+                "short_name"
+            ] = f"{settings['workflow_name']}_{analysis_name}_{variable}_{depth}"
+            image_count += 1
+    return webpage
+
 
 def drive_difference(settings, analysis_name):
     driver_settings = settings[analysis_name].copy()

@@ -12,6 +12,7 @@ import shutil
 
 
 from fdiag.drivers import (
+    drive_variable,
     drive_difference,
     drive_ice_integrals,
     drive_hovm_difference,
@@ -195,6 +196,7 @@ def fdiag():
     webpages["general"]["name"] = settings["workflow_name"]
 
     analyses = {}
+    analyses["variable"] = drive_variable
     analyses["difference"] = drive_difference
     analyses["difference_np"] = drive_difference
     analyses["difference_sp"] = drive_difference
