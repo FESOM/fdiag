@@ -231,8 +231,8 @@ def fdiag():
                     webpage = analyses[analysis](settings, analysis)
                     webpages["analyses"][analysis] = webpage
 
-    with open(opath_webpages, "w") as fp:
-        json.dump(webpages, fp)
+            with open(opath_webpages, "w") as fp:
+                json.dump(webpages, fp)
 
     ofilename = f"{settings['workflow_name']}.html"
     opath = os.path.join(ofolder, ofilename)
