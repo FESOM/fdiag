@@ -1,7 +1,7 @@
 # fdiag
-FESOM2 monitoring
+FESOM2 diagnostics suite
 
-Command line utility that will create a set of diagnostics for FESOM2 runs.
+Command line utility that will run a set of diagnostics for FESOM2 runs.
 
 ## Installation
 ### Requirements
@@ -13,7 +13,7 @@ Command line utility that will create a set of diagnostics for FESOM2 runs.
 Currently only installation from source with pip is supported. You have to clone the repository:
 
 ```bash
-git clone https://github.com/koldunovn/fdiag.git
+git clone https://github.com/FESOM/fdiag.git
 ```
 
 And install it with pip:
