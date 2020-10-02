@@ -22,6 +22,16 @@ end_year: 1986
 start_year_short: 1982
 end_year_short: 1986
 
+variable:
+    temp:
+        levels: [-2, 30, 41]
+        depths: [0, 100, 1000]
+        # units: "psu"
+    ssh:
+        levels: [0, 0.4, 41]
+        depths: [0]
+        how: 'std'
+            # units: "psu"
 # difference:
 #     salt:
 #         levels: [-0.5, 0.5, 41]
@@ -91,13 +101,16 @@ end_year_short: 1986
 # amoc_timeseries:
 #     latitudes: [26.5, 45]
     
-vertical_profile_diff:
-    temp:
-        regions: ["Global Ocean", "Atlantic_Basin"]
-        maxdepth: 3000
+# vertical_profile_diff:
+#     salt:
+#         regions: ["Global Ocean", "Atlantic_Basin"]
+#         maxdepth: 3000
+#     temp:
+#         regions: ["Global Ocean", "Atlantic_Basin"]
+#         maxdepth: 3000
 
-vertical_profile_diff_clim:
-    temp:
-        regions: ["Global Ocean", "Atlantic_Basin"]
-        maxdepth: 3000
+# vertical_profile_diff_clim:
+#     temp:
+#         regions: ["Global Ocean", "Atlantic_Basin"]
+#         maxdepth: 3000
         

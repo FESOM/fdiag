@@ -337,7 +337,7 @@ def drive_amoc_timeseries(settings, analysis_name):
 def drive_vertical_profile(settings, analysis_name):
     driver_settings = settings[analysis_name].copy()
     current_params = create_current_params(settings, years_short=True)
-    if analysis_name != 'vertical_profile_difference_clim':
+    if analysis_name != 'vertical_profile_diff_clim':
         check_num_paths(settings, min_number=2)
         current_params = fill_input(current_params, settings, fill_type = 'reference')
     else:
