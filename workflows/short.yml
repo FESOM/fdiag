@@ -22,15 +22,15 @@ end_year: 1986
 start_year_short: 1982
 end_year_short: 1986
 
-variable:
-    temp:
-        levels: [-2, 30, 41]
-        depths: [0, 100, 1000]
-        # units: "psu"
-    ssh:
-        levels: [0, 0.4, 41]
-        depths: [0]
-        how: 'std'
+# variable:
+#     temp:
+#         levels: [-2, 30, 41]
+#         depths: [0, 100, 1000]
+#         # units: "psu"
+#     ssh:
+#         levels: [0, 0.4, 41]
+#         depths: [0]
+#         how: 'std'
             # units: "psu"
 # difference:
 #     salt:
@@ -135,3 +135,14 @@ variable:
 #         npoints: 100
 #         levels: [-1, 1, 41]
 #         xaxis: 'lat'
+# transect:
+#     Atlantic transect:
+#         variable: temp
+#         lon_start: -30
+#         lat_start: -70
+#         lon_end: -30
+#         lat_end: 60
+#         npoints: 100
+#         levels: [-2, 30, 41]
+#         xaxis: 'lat'
+#         how: 'mean'

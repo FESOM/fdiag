@@ -191,3 +191,14 @@ transect_difference:
         levels: [-1, 1, 41]
         xaxis: 'lat'
 
+transect:
+    Atlantic transect:
+        variable: temp
+        lon_start: -30
+        lat_start: -70
+        lon_end: -30
+        lat_end: 60
+        npoints: 100
+        levels: [-2, 30, 41]
+        xaxis: 'lat'
+        how: 'mean'
