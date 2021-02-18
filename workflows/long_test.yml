@@ -169,3 +169,25 @@ vertical_profile_diff_clim:
         maxdepth: 3000
         units: "psu"
         
+transect_difference_clim:
+    Transect1:
+        variable: temp
+        lon_start: -30
+        lat_start: -70
+        lon_end: -30
+        lat_end: 60
+        npoints: 100
+        levels: [-1, 1, 41]
+        xaxis: 'lat'
+
+transect_difference:
+    Atlantic transect:
+        variable: temp
+        lon_start: -30
+        lat_start: -70
+        lon_end: -30
+        lat_end: 60
+        npoints: 100
+        levels: [-1, 1, 41]
+        xaxis: 'lat'
+

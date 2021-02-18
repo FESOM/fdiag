@@ -21,6 +21,7 @@ from fdiag.drivers import (
     drive_amoc_timeseries,
     drive_vertical_profile,
     drive_ocean_integrals_difference,
+    drive_transect_difference
 )
 
 templates_path = pkg_resources.resource_filename(__name__, f"templates_html")
@@ -214,6 +215,8 @@ def fdiag():
     analyses["vertical_profile_diff_clim"] = drive_vertical_profile
     analyses["ocean_integrals_difference"] = drive_ocean_integrals_difference
     analyses["ocean_integrals_difference_clim"] = drive_ocean_integrals_difference
+    analyses["transect_difference"] = drive_transect_difference
+    analyses["transect_difference_clim"] = drive_transect_difference
 
     # loop over all analyses
     for analysis in analyses:
