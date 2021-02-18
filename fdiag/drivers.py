@@ -31,7 +31,7 @@ def create_current_params(settings, years_short=False):
     return current_params
 
 
-def fill_input(current_params, settings, fill_type = "climatology"):
+def fill_input(current_params, settings, fill_type = "climatology", years_short=True):
     if fill_type == "climatology":
         current_params["input_paths"] = settings["input_paths"][:]
         current_params["input_names"] = settings["input_names"][:]
@@ -43,7 +43,10 @@ def fill_input(current_params, settings, fill_type = "climatology"):
         current_params["input_names"] = settings["input_names"][1:]
         current_params["reference_path"] = settings["input_paths"][0]
         current_params["reference_name"] = settings["input_names"][0]
-        current_params["reference_years"] = settings["years"]
+        if ('years_short' in settings) & (years_short == True):
+            current_params["reference_years"] = settings["years_short"]
+        else:
+            current_params["reference_years"] = settings["years"]
     # elif fill_type == "pure":
     #     current_params["input_paths"] = settings["input_paths"][:]
     #     current_params["input_names"] = settings["input_names"][:]
@@ -438,7 +441,7 @@ def drive_ocean_integrals_difference(settings, analysis_name):
 
 def drive_transect_difference(settings, analysis_name):
     driver_settings = settings[analysis_name].copy()
-    current_params = create_current_params(settings)
+    current_params = create_current_params(settings, years_short=True)
     if analysis_name != 'transect_difference_clim':
         check_num_paths(settings, min_number=2)
         current_params = fill_input(current_params, settings, fill_type = 'reference')
@@ -480,7 +483,7 @@ def drive_transect_difference(settings, analysis_name):
 
 def drive_transect(settings, analysis_name):
     driver_settings = settings[analysis_name].copy()
-    current_params = create_current_params(settings)
+    current_params = create_current_params(settings, years_short=True)
     check_num_paths(settings, min_number=1)
     current_params = fill_input(current_params, settings, fill_type = 'climatology')
     webpage = {}
