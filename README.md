@@ -10,15 +10,7 @@ Command line utility that will run a set of diagnostics for FESOM2 runs.
 
 ### Installation
  
-Currently only installation from source with pip is supported. You can directly install everything via:
-
-```bash
-pip install git+https://github.com/FESOM/fdiag.git
-```
-
-Note that this may require the `--user` flag if you don't have root privileges. 
-
-Alternatively, you have to clone the repository:
+Currently only installation from source with pip is supported. You have to clone the repository:
 
 ```bash
 git clone https://github.com/FESOM/fdiag.git
@@ -30,6 +22,17 @@ And install it with pip:
 cd fdiag
 pip install -e .
 ```
+
+
+Alternatively, you can directly install everything via (but some users reported problems with this one):
+
+```bash
+pip install git+https://github.com/FESOM/fdiag.git
+```
+
+Note that this may require the `--user` flag if you don't have root privileges. 
+
+
 
 ## Usage
 
