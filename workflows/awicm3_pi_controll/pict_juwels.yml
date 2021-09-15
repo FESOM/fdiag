@@ -18,20 +18,15 @@ mapproj: 'pc'
 figsize: [24, 14]
 figsize_small: [7, 4.326]
 start_year: 1850
-end_year: 2089
-start_year_short: 2030
-end_year_short: 2089
+end_year: 2049
+start_year_short: 2000
+end_year_short: 2049
 
 #variable:
 #    MLD2:
 #        levels: [-3000, 0, 41]
 #        depths: [0]
 #        how: 'min'
-variable:
-    m_ice:
-         mapproj: "np"
-    m_ice:
-         mapproj: "sp"
         
 climatology:
     temp:
@@ -59,6 +54,7 @@ climatology:
 #        figsize: [48, 28]
 #        bbox: [-180, 180, 60, 90]
 #        mapproj: "np"
+
         
 ice_integrals:
     figsize: [10, 5]
@@ -71,17 +67,17 @@ ice_integrals:
 hovm_difference_clim:
     Global Ocean:
         temp:
-            levels: [-2, 2, 21]
+            levels: [-1.5, 1.5, 41]
             maxdepth: 6000
         salt:
-            levels: [-0.1, 0.1 , 21]
+            levels: [-0.5, 0.5 , 41]
             maxdepth: 6000
     Atlantic_Basin:
         temp:
-            levels: [-2, 2, 21]
+            levels: [-1.5, 1.5, 41]
             maxdepth: 6000
         salt:
-            levels: [-0.5, 0.5 , 21]
+            levels: [-0.5, 0.5 , 41]
             maxdepth: 6000
 #    Pacific_Basin:
 #        temp:
@@ -91,8 +87,8 @@ hovm_difference_clim:
 #            levels: [-0.5, 0.5 , 41]
 #            maxdepth: 6000
 #    Eurasian basin: 
-    #        temp:
-    #         levels: [-1.5, 1.5, 41]
+#        temp:
+#            levels: [-1.5, 1.5, 41]
 #            maxdepth: 5000
 #        salt:
 #            levels: [-0.5, 0.5 , 41]
