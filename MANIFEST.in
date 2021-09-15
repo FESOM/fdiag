@@ -1,0 +1,4 @@
+include fdiag/templates/*
+include fdiag/templates_html/*
+include fdiag/templates_latex/*
+
