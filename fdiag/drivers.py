@@ -202,7 +202,7 @@ def drive_ice_integrals_combined_nocomparison(settings, analysis_name):
     for variable in ice_analyses:
         webpage[f'image_{image_count}'] = {}
         webpage[f'image_{image_count}']['name'] = f"{variable}"
-        webpage[f'image_{image_count}']['path'] = os.path.join('./figures/', ofile+f"_{variable}.png")
+        webpage[f'image_{image_count}']['path'] = os.path.join('./figures/', ofile+f"_{variable}_combined.png")
         webpage[f'image_{image_count}']['path_nb'] = os.path.join('./notebooks/', ofile_nb)
         webpage[f'image_{image_count}']['short_name'] = f"{settings['workflow_name']}_{analysis_name}_{variable}"
         image_count = image_count+1

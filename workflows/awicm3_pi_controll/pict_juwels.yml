@@ -18,9 +18,9 @@ mapproj: 'pc'
 figsize: [24, 14]
 figsize_small: [7, 4.326]
 start_year: 1850
-end_year: 2049
-start_year_short: 2000
-end_year_short: 2049
+end_year: 2089
+start_year_short: 2040
+end_year_short: 2089
 
 #variable:
 #    MLD2:
@@ -55,14 +55,8 @@ climatology:
 #        bbox: [-180, 180, 60, 90]
 #        mapproj: "np"
 
-        
-ice_integrals:
+ice_integrals_combined_nocomparison:
     figsize: [10, 5]
-    hemisphere: "N"
-    
-ice_integrals:
-    figsize: [10, 5]
-    hemisphere: "S"
 
 hovm_difference_clim:
     Global Ocean:
