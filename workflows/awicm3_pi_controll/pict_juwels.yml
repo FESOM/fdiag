@@ -18,9 +18,9 @@ mapproj: 'pc'
 figsize: [24, 14]
 figsize_small: [7, 4.326]
 start_year: 1850
-end_year: 2089
-start_year_short: 2040
-end_year_short: 2089
+end_year: 2189
+start_year_short: 2140
+end_year_short: 2189
 
 #variable:
 #    MLD2:
@@ -56,7 +56,8 @@ climatology:
 #        mapproj: "np"
 
 ice_integrals_combined_nocomparison:
-    figsize: [10, 5]
+
+enso_eof:
 
 hovm_difference_clim:
     Global Ocean:
