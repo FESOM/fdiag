@@ -18,9 +18,9 @@ mapproj: 'pc'
 figsize: [24, 14]
 figsize_small: [7, 4.326]
 start_year: 1850
-end_year: 2089
-start_year_short: 2040
-end_year_short: 2089
+end_year: 2260
+start_year_short: 2215
+end_year_short: 2260
 
 #variable:
 #    MLD2:
