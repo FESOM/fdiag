@@ -56,10 +56,14 @@ climatology:
 #        mapproj: "np"
 
 ice_integrals_combined_nocomparison:
-        figsize: [10, 5]
+        figsize: [8, 4]
 
 enso_eof:
-        figsize: [10, 5]
+        figsize: [8, 4]
+
+enso_box:
+        figsize: [8, 4]
+        box: 'Nino34'
 
 hovm_difference_clim:
     Global Ocean:

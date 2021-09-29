@@ -24,7 +24,8 @@ from fdiag.drivers import (
     drive_ocean_integrals_difference,
     drive_transect_difference,
     drive_transect,
-    drive_enso_eof
+    drive_enso_eof,
+    drive_enso_box
 )
 
 templates_path = pkg_resources.resource_filename(__name__, f"templates_html")
@@ -223,6 +224,7 @@ def fdiag():
     analyses["transect_difference_clim"] = drive_transect_difference
     analyses["transect"] = drive_transect
     analyses["enso_eof"] = drive_enso_eof
+    analyses["enso_box"] = drive_enso_box
 
     # loop over all analyses
     for analysis in analyses:
