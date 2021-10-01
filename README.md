@@ -7,6 +7,7 @@ Command line utility that will run a set of diagnostics for FESOM2 runs.
 ### Requirements
 * You should have [pyfesom2](https://github.com/FESOM/pyfesom2) installed already. 
 * In addition you should also have [papermill](https://papermill.readthedocs.io/en/latest/).
+* For `enso_eof` diagnostic to work, you need also [eofs](https://ajdawson.github.io/eofs/latest/)
 
 ### Installation
  
