@@ -179,6 +179,35 @@ def drive_ice_integrals(settings, analysis_name):
         image_count = image_count+1
     return webpage
 
+def drive_ice_integrals_combined(settings, analysis_name):
+    driver_settings = settings[analysis_name].copy()
+    current_params = create_current_params(settings)
+    check_num_paths(settings, min_number=1)
+    current_params.update(driver_settings)
+
+    ofile = f"{settings['workflow_name']}_{analysis_name}"
+    ofile_nb = f"{settings['workflow_name']}_{analysis_name}.ipynb"
+    current_params["ofile"] = os.path.join(settings['ofolder_figures'], ofile)
+
+    pm.execute_notebook(
+                f"{templates_nb_path}/{analysis_name}.ipynb",
+                os.path.join(settings['ofolder_notebooks'], ofile_nb),
+                parameters=current_params,
+                nest_asyncio=True,
+            )
+    ice_analyses = ['icearea', "iceext", 'icevol']
+
+    webpage = {}
+    image_count = 0
+    for variable in ice_analyses:
+        webpage[f'image_{image_count}'] = {}
+        webpage[f'image_{image_count}']['name'] = f"{variable}"
+        webpage[f'image_{image_count}']['path'] = os.path.join('./figures/', ofile+f"_{variable}_combined.png")
+        webpage[f'image_{image_count}']['path_nb'] = os.path.join('./notebooks/', ofile_nb)
+        webpage[f'image_{image_count}']['short_name'] = f"{settings['workflow_name']}_{analysis_name}_{variable}"
+        image_count = image_count+1
+    return webpage
+
 def drive_hovm_difference(settings, analysis_name):
     driver_settings = settings[analysis_name].copy()
     current_params = create_current_params(settings)
