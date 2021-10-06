@@ -15,7 +15,7 @@ from fdiag.drivers import (
     drive_variable,
     drive_difference,
     drive_ice_integrals,
-    drive_ice_integrals_combined_nocomparison,
+    drive_ice_integrals_combined,
     drive_hovm_difference,
     drive_ocean_integrals,
     drive_xmoc,
@@ -209,7 +209,7 @@ def fdiag():
     analyses["climatology_np"] = drive_difference
     analyses["climatology_sp"] = drive_difference
     analyses["ice_integrals"] = drive_ice_integrals
-    analyses["ice_integrals_combined_nocomparison"] = drive_ice_integrals_combined_nocomparison
+    analyses["ice_integrals_combined"] = drive_ice_integrals_combined
     analyses["hovm_difference"] = drive_hovm_difference
     analyses["hovm_difference_clim"] = drive_hovm_difference
     analyses["ocean_integrals"] = drive_ocean_integrals
