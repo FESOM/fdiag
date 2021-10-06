@@ -179,7 +179,7 @@ def drive_ice_integrals(settings, analysis_name):
         image_count = image_count+1
     return webpage
 
-def drive_ice_integrals_combined_nocomparison(settings, analysis_name):
+def drive_ice_integrals_combined(settings, analysis_name):
     driver_settings = settings[analysis_name].copy()
     current_params = create_current_params(settings)
     check_num_paths(settings, min_number=1)
