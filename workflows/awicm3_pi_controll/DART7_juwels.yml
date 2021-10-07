@@ -1,6 +1,6 @@
 workflow_name: "awicm3_DART7"
 input_paths:
-    - /p/scratch/chhb19/streffing1/runtime/awicm3-frontiers/DART7/outdata/fesom/
+    - /p/scratch/chhb19/semmler1/runtime/awicm3-frontiers/DART7/outdata/fesom/
 #    - /work/ollie/dsidoren/lidcp/
 
 input_names:
@@ -18,9 +18,9 @@ mapproj: 'pc'
 figsize: [12, 7]
 figsize_small: [7, 4.326]
 start_year: 1990
-end_year: 2019
-start_year_short: 2005
-end_year_short: 2019
+end_year: 2035
+start_year_short: 2021
+end_year_short: 2035
 
 #variable:
 #    MLD2:
