@@ -1,10 +1,10 @@
-workflow_name: "awicm3_pict"
+workflow_name: "awicm3_spin"
 input_paths:
-    - /p/scratch/chhb19/jstreffi/runtime/awicm-3.1/PICT/outdata/fesom/
+    - /p/scratch/chhb19/jstreffi/runtime/awicm-3.1/SPIN/outdata/fesom/
 #    - /work/ollie/dsidoren/lidcp/
 
 input_names:
-    - PICT
+    - SPIN
 #    - lidcp
    
 meshpath: '/p/project/chhb19/streffing1/input/fesom2/core2/'
@@ -18,9 +18,9 @@ mapproj: 'pc'
 figsize: [24, 14]
 figsize_small: [7, 4.326]
 start_year: 1850
-end_year: 2349
-start_year_short: 2300
-end_year_short: 2349
+end_year: 2529
+start_year_short: 2479
+end_year_short: 2529
 
 #variable:
 #    MLD2:
@@ -68,17 +68,17 @@ enso_box:
 hovm_difference_clim:
     Global Ocean:
         temp:
-            levels: [-1.5, 1.5, 41]
+            levels: [-2, 2, 21]
             maxdepth: 6000
         salt:
-            levels: [-0.5, 0.5 , 41]
+            levels: [-0.1, 0.1 , 21]
             maxdepth: 6000
     Atlantic_Basin:
         temp:
-            levels: [-1.5, 1.5, 41]
+            levels: [-3, 3, 21]
             maxdepth: 6000
         salt:
-            levels: [-0.5, 0.5 , 41]
+            levels: [-0.5, 0.5 , 21]
             maxdepth: 6000
 #    Pacific_Basin:
 #        temp:
@@ -102,21 +102,21 @@ hovm_difference_clim:
 #            levels: [-0.5, 0.5 , 41]
 #            maxdepth: 5000
             
-#ocean_integrals_difference_clim:
-#    Global Ocean:
-#        temp:
-#            uplows: [[0, 100], [0, 700], [700, 5000]]
-#            figsize: [14, 8]
-#        salt:
-#            uplows: [[0, 100], [0, 700], [700, 5000]]
-#            figsize: [14, 8]
-#    Atlantic_Basin:
-#        temp:
-#            uplows: [[0, 100], [0, 700], [700, 5000]]
-#            figsize: [14, 8]
-#        salt:
-#            uplows: [[0, 100], [0, 700], [700, 5000]]
-#            figsize: [14, 8]
+ocean_integrals_difference_clim:
+    Global Ocean:
+        temp:
+            uplows: [[0, 100], [100, 1000], [1000, 6000]]
+            figsize: [14, 8]
+        salt:
+            uplows: [[0, 100], [100, 1000], [1000, 6000]]
+            figsize: [14, 8]
+    Atlantic_Basin:
+        temp:
+            uplows: [[0, 100], [100, 1000], [1000, 6000]]
+            figsize: [14, 8]
+        salt:
+            uplows: [[0, 100], [100, 1000], [1000, 6000]]
+            figsize: [14, 8]
 #    Pacific_Basin:
 #        temp:
 #            uplows: [[0, 100], [0, 700], [700, 5000]]
