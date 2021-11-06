@@ -594,11 +594,11 @@ def drive_enso_box(settings, analysis_name):
                 parameters=current_params,
                 nest_asyncio=True,
             )
-    enso_eof_analyses = ['enso_box_map','enso_box_index', "enso_box_psd"]
+    enso_box_analyses = ['enso_box_map','enso_box_index', "enso_box_psd"]
 
     webpage = {}
     image_count = 0
-    for variable in enso_eof_analyses:
+    for variable in enso_box_analyses:
         webpage[f'image_{image_count}'] = {}
         webpage[f'image_{image_count}']['name'] = f"{variable}"
         webpage[f'image_{image_count}']['path'] = os.path.join('./figures/', ofile+f"_{variable}.png")
@@ -606,3 +606,33 @@ def drive_enso_box(settings, analysis_name):
         webpage[f'image_{image_count}']['short_name'] = f"{settings['workflow_name']}_{analysis_name}_{variable}"
         image_count = image_count+1
     return webpage
+
+def drive_openifs_radiation(settings, analysis_name):
+    driver_settings = settings[analysis_name].copy()
+    current_params = create_current_params(settings)
+    check_num_paths(settings, min_number=1)
+    current_params.update(driver_settings)
+
+    ofile = f"{settings['workflow_name']}_{analysis_name}"
+    ofile_nb = f"{settings['workflow_name']}_{analysis_name}.ipynb"
+    current_params["ofile"] = os.path.join(settings['ofolder_figures'], ofile)
+
+    pm.execute_notebook(
+                f"{templates_nb_path}/{analysis_name}.ipynb",
+                os.path.join(settings['ofolder_notebooks'], ofile_nb),
+                parameters=current_params,
+                nest_asyncio=True,
+            )
+    radiation_analyses = ['imbalance']
+
+    webpage = {}
+    image_count = 0
+    for variable in radiation_analyses:
+        webpage[f'image_{image_count}'] = {}
+        webpage[f'image_{image_count}']['name'] = f"{variable}"
+        webpage[f'image_{image_count}']['path'] = os.path.join('./figures/', ofile+f"_{variable}_combined.png")
+        webpage[f'image_{image_count}']['path_nb'] = os.path.join('./notebooks/', ofile_nb)
+        webpage[f'image_{image_count}']['short_name'] = f"{settings['workflow_name']}_{analysis_name}_{variable}"
+        image_count = image_count+1
+    return webpage
+
