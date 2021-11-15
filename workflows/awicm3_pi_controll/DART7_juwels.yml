@@ -1,0 +1,58 @@
+workflow_name: "awicm3_DART7"
+input_paths:
+    - /p/scratch/chhb19/semmler1/runtime/awicm3-frontiers/DART7/outdata/fesom/
+#    - /work/ollie/dsidoren/lidcp/
+
+input_names:
+    - DART7
+#    - lidcp
+   
+meshpath: '/p/project/chhb19/jstreffi/input/fesom2/dart/'
+abg: [0, 0, 0]
+climatology_path: '/p/project/chhb19/streffing1/postprocessing/climatologies/fdiag/output_DART/'
+climatology_year: 1990
+columns: 1
+bbox: [-180, 180, -90, 90]
+res: [360, 180]
+mapproj: 'pc'
+figsize: [14, 8]
+figsize_small: [7, 4.326]
+start_year: 1990
+end_year: 2035
+start_year_short: 2021
+end_year_short: 2035
+
+
+variable:
+    MLD2:
+        levels: [-3000, 0, 41]
+        depths: [0]
+        how: 'min'
+        units: "depth"
+
+        
+climatology:
+    temp:
+        levels: [-5, 5, 21]
+        depths: [0, 100, 500, 1000]
+    salt:
+        levels: [-2, 2, 21]
+        depths: [0, 100, 500, 1000]
+        units:   "psu"
+
+hovm_difference_clim:
+    Global Ocean:
+        temp:
+            levels: [-1, 1 , 21]
+            maxdepth: 6000
+        salt:
+            levels: [-0.1, 0.1 , 21]
+            maxdepth: 6000
+    Atlantic_Basin:
+        temp:
+            levels: [-2, 2 , 21]
+            maxdepth: 6000
+        salt:
+            levels: [-0.5, 0.5 , 21]
+            maxdepth: 6000
+

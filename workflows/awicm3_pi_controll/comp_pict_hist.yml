@@ -1,14 +1,14 @@
-workflow_name: "awicm3_pic3"
+workflow_name: "awicm3_pict_hist_comp"
 input_paths:
-    - /p/largedata/hhb19/jstreffi/runtime/awicm-3.1/PIC3/outdata/fesom/
-#    - /work/ollie/dsidoren/lidcp/
+    - /p/scratch/chhb19/jstreffi/runtime/awicm-3.1/PICT/outdata/fesom/
+    - /p/scratch/chhb19/jstreffi/runtime/awicm-3.1/HIST/outdata/fesom/
 
 input_names:
-    - PIC3
-#    - lidcp
-
+    - PICT
+    - HIST
+   
 meshpath: '/p/project/chhb19/streffing1/input/fesom2/core2/'
-abg: [50, 15, -90]
+abg: [0, 0, 0]
 climatology_path: '/p/project/chhb19/streffing1/postprocessing/climatologies/fdiag/output_awicm3/'
 climatology_year: 1958
 columns: 1
@@ -18,9 +18,9 @@ mapproj: 'pc'
 figsize: [24, 14]
 figsize_small: [7, 4.326]
 start_year: 1850
-end_year: 2489
-start_year_short: 2439
-end_year_short: 2489
+end_year: 2014
+start_year_short: 2004
+end_year_short: 2014
 
 #variable:
 #    MLD2:
@@ -58,12 +58,12 @@ climatology:
 ice_integrals_combined_nocomparison:
         figsize: [8, 4]
 
-enso_eof:
-        figsize: [8, 4]
-
-enso_box:
-        figsize: [8, 4]
-        box: 'Nino34'
+#enso_eof:
+#        figsize: [8, 4]
+#
+#enso_box:
+#        figsize: [8, 4]
+#        box: 'Nino34'
 
 hovm_difference_clim:
     Global Ocean:
