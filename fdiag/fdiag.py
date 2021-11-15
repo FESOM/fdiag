@@ -25,7 +25,8 @@ from fdiag.drivers import (
     drive_transect_difference,
     drive_transect,
     drive_enso_eof,
-    drive_enso_box
+    drive_enso_box,
+    drive_openifs_radiation
 )
 
 templates_path = pkg_resources.resource_filename(__name__, f"templates_html")
@@ -174,6 +175,10 @@ def fdiag():
         settings["years_short"] = list(
             range(settings["start_year_short"], settings["end_year_short"] + 1)
         )
+    if "start_exp" in settings:
+        settings["exps"] = list(
+            range(settings["start_exp"], settings["end_exp"] + 1)
+        )
     settings["input_paths"] = input_paths
     settings["input_names"] = input_names
     settings["workflow_name"] = workflow_name
@@ -225,6 +230,7 @@ def fdiag():
     analyses["transect"] = drive_transect
     analyses["enso_eof"] = drive_enso_eof
     analyses["enso_box"] = drive_enso_box
+    analyses["openifs_radiation"] = drive_openifs_radiation
 
     # loop over all analyses
     for analysis in analyses:
