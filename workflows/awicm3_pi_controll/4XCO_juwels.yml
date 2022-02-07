@@ -1,0 +1,161 @@
+workflow_name: "4XCO"
+input_paths:
+    - /p/largedata/hhb19/jstreffi/runtime/awicm-3.1/4XCO/outdata/fesom/
+#    - /work/ollie/dsidoren/lidcp/
+
+input_names:
+    - 4XCO
+#    - lidcp
+
+meshpath: '/p/project/chhb19/streffing1/input/fesom2/core2/'
+abg: [50, 15, -90]
+climatology_path: '/p/project/chhb19/streffing1/postprocessing/climatologies/fdiag/output_awicm3/'
+climatology_year: 1958
+columns: 1
+bbox: [-180, 180, -90, 90]
+res: [360, 180]
+mapproj: 'pc'
+figsize: [24, 14]
+figsize_small: [7, 4.326]
+start_year: 1850
+end_year: 1984
+start_year_short: 1970
+end_year_short: 1984
+
+#variable:
+#    MLD2:
+#        levels: [-3000, 0, 41]
+#        depths: [0]
+#        how: 'min'
+        
+climatology:
+    temp:
+        levels: [-5, 5, 11]
+        depths: [0, 100, 500, 1000]
+        figsize: [14, 8]
+    salt:
+        levels: [-2, 2, 11]
+        depths: [0, 100, 500, 1000]
+        units: "psu"
+        figsize: [14, 8]
+
+
+#difference_np:
+#    temp:
+#        levels: [-1, 1, 41]
+#        depths: [0, 100, 400, 1000]
+#        figsize: [48, 28]
+#        bbox: [-180, 180, 60, 90]
+#        mapproj: "np"
+#    salt:
+#        levels: [-0.5, 0.5, 41]
+#        depths: [0, 100, 400, 1000]
+#        units: "psu"
+#        figsize: [48, 28]
+#        bbox: [-180, 180, 60, 90]
+#        mapproj: "np"
+
+ice_integrals_combined_nocomparison:
+        figsize: [8, 4]
+
+enso_eof:
+        figsize: [8, 4]
+
+enso_box:
+        figsize: [8, 4]
+        box: 'Nino34'
+
+hovm_difference_clim:
+    Global Ocean:
+        temp:
+            levels: [-2, 2, 21]
+            maxdepth: 6000
+        salt:
+            levels: [-0.1, 0.1 , 21]
+            maxdepth: 6000
+    Atlantic_Basin:
+        temp:
+            levels: [-3, 3, 21]
+            maxdepth: 6000
+        salt:
+            levels: [-0.5, 0.5 , 21]
+            maxdepth: 6000
+#    Pacific_Basin:
+#        temp:
+#            levels: [-1.5, 1.5, 41]
+#            maxdepth: 6000
+#        salt:
+#            levels: [-0.5, 0.5 , 41]
+#            maxdepth: 6000
+#    Eurasian basin: 
+#        temp:
+#            levels: [-1.5, 1.5, 41]
+#            maxdepth: 5000
+#        salt:
+#            levels: [-0.5, 0.5 , 41]
+#            maxdepth: 5000
+#    Amerasian basin: 
+#        temp:
+#            levels: [-1.5, 1.5, 41]
+#            maxdepth: 5000
+#        salt:
+#            levels: [-0.5, 0.5 , 41]
+#            maxdepth: 5000
+            
+ocean_integrals_difference_clim:
+    Global Ocean:
+        temp:
+            uplows: [[0, 100], [100, 1000], [1000, 6000]]
+            figsize: [14, 8]
+        salt:
+            uplows: [[0, 100], [100, 1000], [1000, 6000]]
+            figsize: [14, 8]
+    Atlantic_Basin:
+        temp:
+            uplows: [[0, 100], [100, 1000], [1000, 6000]]
+            figsize: [14, 8]
+        salt:
+            uplows: [[0, 100], [100, 1000], [1000, 6000]]
+            figsize: [14, 8]
+#    Pacific_Basin:
+#        temp:
+#            uplows: [[0, 100], [0, 700], [700, 5000]]
+#            figsize: [14, 8]
+#        salt:
+#            uplows: [[0, 100], [0, 700], [700, 5000]]
+#            figsize: [14, 8]
+#    Eurasian basin:
+#        temp:
+#            uplows: [[0, 100], [0, 700]]
+#            figsize: [14, 8]
+#        salt:
+#            uplows: [[0, 100], [0, 700]]
+#            figsize: [14, 8]
+#    Amerasian basin:
+#        temp:
+#            uplows: [[0, 100], [0, 700]]
+#            figsize: [14, 8]
+#        salt:
+#            uplows: [[0, 100], [0, 700]]
+#            figsize: [14, 8]
+    
+xmoc:
+    Global Ocean:
+        levels: [-30, 30, 41]
+    Atlantic_MOC:
+        levels: [-20, 20, 41]
+    Pacific_MOC:
+        levels: [-20, 20, 41]
+
+#xmoc_difference:
+#    Global Ocean:
+#        levels: [-5, 5, 41]
+#    Atlantic_MOC:
+#        levels: [-2, 2, 41]
+#    Pacific_MOC:
+#        levels: [-2, 2, 41]
+        
+amoc_timeseries:
+    latitudes: [26.5, 45]
+    figsize: [14, 8]
+    
