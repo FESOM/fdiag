@@ -1,0 +1,149 @@
+workflow_name: "mesh"
+input_paths:
+    - /p/scratch/chhb20/streffing1/runtime/awicm3-frontiers-xios/pi_controll_v3.1/outdata/
+input_names:
+    - Spinup_SPP
+
+meshpath: '/p/project/chhb19/streffing1/input/fesom2/core2/'
+abg: [0, 0, 0]
+climatology_path: '/p/project/chhb19/streffing1/postprocessing/climatologies/fdiag/output_awicm3/'
+climatology_year: 1958
+columns: 2
+bbox: [-180, 180, -80, 90]
+res: [360, 180]
+mapproj: 'pc'
+figsize: [9, 5.56]
+start_year: 1450
+end_year: 1460
+# if short years are set, will be used for drive_difference, drive_xmoc, drive_vertical_profile
+start_year_short: 1455
+end_year_short: 1460
+
+mesh:
+    resolution:
+        mesh_name: 'CORE2'
+
+# variable:
+#     temp:
+#         levels: [-2, 30, 41]
+#         depths: [0, 100, 1000]
+#         # units: "psu"
+#     ssh:
+#         levels: [0, 0.4, 41]
+#         depths: [0]
+#         how: 'std'
+            # units: "psu"
+# difference:
+#     salt:
+#         levels: [-0.5, 0.5, 41]
+#         depths: [0]
+#         units: "psu"
+
+# difference_np:
+#     salt:
+#         levels: [-0.5, 0.5, 41]
+#         depths: [0]
+#         units: "psu"
+#         bbox: [-180, 180, 60, 90]
+#         mapproj: 'np'
+
+# climatology_np:
+#     salt:
+#         levels: [-1, 1, 41]
+#         depths: [0]
+#         units: "psu"
+#         bbox: [-180, 180, 60, 90]
+#         mapproj: 'np'
+
+# climatology:
+#     salt:
+#         levels: [-1, 1, 41]
+#         depths: [100, 2000]
+#         units: "psu"
+
+# ice_integrals:
+#     figsize: [10, 5]
+#     hemisphere: "N"
+    
+# hovm_difference:
+#     Eurasian basin: 
+#         temp:
+#             levels: [-0.1, 0.1, 41]
+#             maxdepth: 1000
+
+# hovm_difference_clim:
+#     Global Ocean: 
+#         temp:
+#             levels: [-0.1, 0.1, 41]
+#             maxdepth: 1000
+            
+# ocean_integrals:
+#     Global Ocean:
+#         temp:
+#             uplows: [[0, 100]]
+
+# ocean_integrals_difference_clim:
+#     Global Ocean:
+#         temp:
+#             uplows: [[0, 100]]
+
+# ocean_integrals_difference:
+#     Global Ocean:
+#         temp:
+#             uplows: [[0, 100]]
+# xmoc:
+#     Global Ocean:
+#         levels: [-20, 20, 41]
+
+# xmoc_difference:
+#     Global Ocean:
+#         levels: [-5, 5, 41]
+        
+# amoc_timeseries:
+#     latitudes: [26.5, 45]
+    
+# vertical_profile_diff:
+#     salt:
+#         regions: ["Global Ocean", "Atlantic_Basin"]
+#         maxdepth: 3000
+#     temp:
+#         regions: ["Global Ocean", "Atlantic_Basin"]
+#         maxdepth: 3000
+
+# vertical_profile_diff_clim:
+#     temp:
+#         regions: ["Global Ocean", "Atlantic_Basin"]
+#         maxdepth: 3000
+        
+# transect_difference_clim:
+#     Transect1:
+#         variable: temp
+#         lon_start: -30
+#         lat_start: -70
+#         lon_end: -30
+#         lat_end: 60
+#         npoints: 100
+#         levels: [-1, 1, 41]
+#         xaxis: 'lat'
+
+# transect_difference:
+#     Atlantic transect:
+#         variable: temp
+#         lon_start: -30
+#         lat_start: -70
+#         lon_end: -30
+#         lat_end: 60
+#         npoints: 100
+#         levels: [-1, 1, 41]
+#         xaxis: 'lat'
+# transect:
+#     Atlantic transect:
+#         variable: temp
+#         lon_start: -30
+#         lat_start: -70
+#         lon_end: -30
+#         lat_end: 60
+#         npoints: 100
+#         levels: [-2, 30, 41]
+#         xaxis: 'lat'
+#         how: 'mean'

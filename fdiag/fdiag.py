@@ -26,7 +26,8 @@ from fdiag.drivers import (
     drive_transect,
     drive_enso_eof,
     drive_enso_box,
-    drive_openifs_radiation
+    drive_openifs_radiation,
+    drive_mesh
 )
 
 templates_path = pkg_resources.resource_filename(__name__, f"templates_html")
@@ -231,6 +232,7 @@ def fdiag():
     analyses["enso_eof"] = drive_enso_eof
     analyses["enso_box"] = drive_enso_box
     analyses["openifs_radiation"] = drive_openifs_radiation
+    analyses["mesh"] = drive_mesh
 
     # loop over all analyses
     for analysis in analyses:
